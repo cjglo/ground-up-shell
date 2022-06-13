@@ -1,5 +1,11 @@
 # Ground-Up Shell
-A Shell built in C without any external libraries.
+A Unix Shell built in C without external libraries.
+
+## How to Use 
+
+### Reading from file
+
+Currently the only way to run commands in the shell is to create a file listing commands to run and then passing that to the shell program. 
 
 ## Current & Planned Features:
 

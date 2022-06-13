@@ -19,28 +19,7 @@ int main(int argc, char* argv[]) {
     }
 
     char ch = fgetc(file);
-    while(ch != EOF) {
-        printf("%c", ch);
-        ch = fgetc(file);
 
-    // TODO: Loop through file lines and grab commands by assinging to buffer
-    // TODO: Then fork process and exec() command
-    // TODO: Then wait and execute next command
-    }
-
-    pid_t pid;
-    pid = fork(); // two lines of execution here on, parent and child
-
-    if(pid < 0) { // ERROR
-        printf("Forked Call Failed");
-        exit(1);
-    } else if(pid == 0) { // child process
-        
-        // TODO: Logic for executing call
-
-    } else { // parent
-        wait(NULL);
-    }
 
 
     char* command = malloc(1); // temporary while command isn't used yet
