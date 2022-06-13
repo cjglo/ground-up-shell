@@ -1,5 +1,7 @@
 #include "../../include/const.h"
-#include "../utils/fork_and_exec.c"
+#include "../../include/main.h"
+#include "../../include/fork_and_exec.h"
+
 
 int read_from_file(FILE* file) {
 

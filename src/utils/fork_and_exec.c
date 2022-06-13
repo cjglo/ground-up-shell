@@ -1,5 +1,8 @@
+#include "../../include/main.h"
 
-bool fork_and_exec(char* command) {
+int fork_and_exec(const char* command) {
+
+    if(true) return true; // TODO: Remove when ready for process forking
 
     pid_t pid;
     pid = fork(); // two lines of execution here on, parent and child
