@@ -5,7 +5,7 @@ build: ${C_SOURCE_FILES}
 	gcc ${C_SOURCE_FILES} -o shell.out
 
 run: shell.out
-	./shell.out
+	./shell.out $(arg)
 
 clean:
 	rm shell.out
