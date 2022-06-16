@@ -9,3 +9,15 @@ run: shell.out
 
 clean:
 	rm shell.out
+
+all:
+	make build
+	printf "\n\n"
+	make run $(arg)
+	make clean
+
+all_test:
+	make build
+	printf "\n\n"
+	make run arg=input.test
+	make clean

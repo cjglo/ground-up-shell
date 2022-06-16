@@ -2,49 +2,59 @@
 #include "../../include/main.h"
 #include "../../include/fork_and_exec.h"
 
+char** file_to_string(FILE* file);
 
 int read_from_file(FILE* file) {
 
-    while(ch = fgetc(file) != EOF) {
-        
-        if(ch == '\n') {
-            // end of command
+    char** buffer = file_to_string(file);
 
-        } else if(isspace(ch)) {
-            // parameter
-
-
-        } else {
-            // building word
-
-        }
-
+    for(int i = 0; i<3; i++) {
+        // printf("%s\n", buffer[i]);
     }
-
-
-
-    const char* garbage = "123abc";
-    fork_and_exec(garbage);
+    
     return FILE_EXEC_FAIL;
 }
 
-char* file_to_string(FILE* file) {
+char** file_to_string(FILE* file) {
 
-    int len = 0;
-    while(fegetc(file) != EOF) len++;
+    char ch;
+    int number_of_lines = 1;
+    while(ch = fgetc(file) != EOF) {
+        if(ch == '\n') number_of_lines++;
+    }
 
-    char* buffer = malloc(sizeof(char)*len+1);
+    char** str_lines = malloc(sizeof(char)*(number_of_lines+1));
     // restart file pointer to now copy file to str
     rewind(file);
 
-    int i = 0;
-    while(ch = fegetc(file) != EOF) {
-        *(buffer+i)= ch;
-        i++;
+    int line_len = 1;
+    int line_num = 1;
+    while(ch = fgetc(file) != EOF) {
+        if(ch != '\n') {
+            line_len++;
+        } else {
+            // same as incr ptr then deref
+            str_lines[line_num] = malloc(sizeof(char)*(line_len+1));
+            line_len = 0;
+        }
     }
-    *(buffer+i) = '\0';
 
-    
+    rewind(file);
+    // time to insert chars
 
+    line_num = 0;
+    int pos_in_line = 0;
+    while(ch = fgetc(file) != EOF) {
+        
+        if(ch != '\n') {
+            str_lines[line_num][pos_in_line] = ch;
+            pos_in_line++;
+        } else {
+            // str_lines[line_num][pos_in_line] = '\0';
+            pos_in_line = 0;
+            line_num++;
+        }
+    }
 
+    return str_lines;
 }
