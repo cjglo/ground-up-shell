@@ -19,8 +19,10 @@ char** file_to_string(FILE* file) {
 
     char ch;
     int number_of_lines = 1;
-    while(ch = fgetc(file) != EOF) {
+    ch = fgetc(file);
+    while(ch != EOF) {
         if(ch == '\n') number_of_lines++;
+        ch = fgetc(file);
     }
 
     char** str_lines = malloc(sizeof(char)*(number_of_lines+1));
@@ -28,25 +30,34 @@ char** file_to_string(FILE* file) {
     rewind(file);
 
     int line_len = 1;
-    int line_num = 1;
-    while(ch = fgetc(file) != EOF) {
-        if(ch != '\n') {
+    int line_num = 0;
+    do {
+        ch = fgetc(file);
+        printf("%c\n", ch);
+        if(ch != '\n' && ch != EOF) {
             line_len++;
         } else {
             // same as incr ptr then deref
             str_lines[line_num] = malloc(sizeof(char)*(line_len+1));
+            printf("line_num: %d\n", line_num);
             line_len = 0;
+            line_num++;
         }
-    }
+    } while(ch != EOF);
+
+    printf("done\n");
 
     rewind(file);
     // time to insert chars
 
     line_num = 0;
     int pos_in_line = 0;
-    while(ch = fgetc(file) != EOF) {
-        
+    ch = fgetc(file);
+    while(ch != EOF) {
+
+        printf("%c\n", ch);
         if(ch != '\n') {
+            printf("line_num: %d , pos: %d\n", line_num, pos_in_line);
             str_lines[line_num][pos_in_line] = ch;
             pos_in_line++;
         } else {
@@ -54,6 +65,7 @@ char** file_to_string(FILE* file) {
             pos_in_line = 0;
             line_num++;
         }
+        ch = fgetc(file);
     }
 
     return str_lines;
