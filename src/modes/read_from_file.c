@@ -2,20 +2,22 @@
 #include "../../include/main.h"
 #include "../../include/fork_and_exec.h"
 
-char** file_to_string(FILE* file);
+char** file_to_strings(FILE* file);
 
 int read_from_file(FILE* file) {
 
-    char** buffer = file_to_string(file);
+    char** buffer = file_to_strings(file);
 
-    for(int i = 0; i<3; i++) {
-        // printf("%s\n", buffer[i]);
-    }
+    //TODO: Need number of lines, and I guess 
+    // break down each line into array of words?  
+    // redesign might be necessary, where grab a line at 
+    // a time.  Not sure
+    
     
     return FILE_EXEC_FAIL;
 }
 
-char** file_to_string(FILE* file) {
+char** file_to_strings(FILE* file) {
 
     char ch;
     int number_of_lines = 1;
@@ -33,31 +35,24 @@ char** file_to_string(FILE* file) {
     int line_num = 0;
     do {
         ch = fgetc(file);
-        printf("%c\n", ch);
         if(ch != '\n' && ch != EOF) {
             line_len++;
         } else {
             // same as incr ptr then deref
             str_lines[line_num] = malloc(sizeof(char)*(line_len+1));
-            printf("line_num: %d\n", line_num);
             line_len = 0;
             line_num++;
         }
     } while(ch != EOF);
 
-    printf("done\n");
-
     rewind(file);
-    // time to insert chars
 
+    // time to insert chars
     line_num = 0;
     int pos_in_line = 0;
     ch = fgetc(file);
     while(ch != EOF) {
-
-        printf("%c\n", ch);
         if(ch != '\n') {
-            printf("line_num: %d , pos: %d\n", line_num, pos_in_line);
             str_lines[line_num][pos_in_line] = ch;
             pos_in_line++;
         } else {
