@@ -61,7 +61,6 @@ char** file_to_string(FILE* file) {
             str_lines[line_num][pos_in_line] = ch;
             pos_in_line++;
         } else {
-            // str_lines[line_num][pos_in_line] = '\0';
             pos_in_line = 0;
             line_num++;
         }
