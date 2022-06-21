@@ -9,7 +9,7 @@ Currently the only way to run commands in the shell is to create a file listing 
 
 ## Current & Planned Features:
 
-- [ ] [IN PROGRESS] Accepts file input with commands of arbitary length and creates processes to execute, then exits parent process
+- [ ] ⏳ [IN PROGRESS] ⏳ Accepts file input with commands of arbitary length and creates processes to execute, then exits parent process
 - [ ] Running commands from interactive user input
 - [ ] Setting/retrieving environment variables
 - [ ] Support for pipes (including stdin/stdout redirection)

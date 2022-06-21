@@ -25,10 +25,10 @@ int main(int argc, char* argv[]) {
             fprintf( stderr, "File: %s Failed to execute commands\n", argv[1]);
             break; //TODO: Possibly should exit 1 here since was failure
         case FILE_EXEC_PARTIAL_SUCCESS:
-            fprintf( stderr, "File: %s Partial failure to some of execute Commands\n", argv[1]);
+            fprintf( stderr, "File: %s Partial failure to some of execute commands\n", argv[1]);
             break;
         case FILE_EXEC_SUCCESS:
-            fprintf( stdout, "Succesfully executed Commands\n");
+            fprintf( stdout, "Succesfully executed commands\n");
             break;
         default:
             fprintf(stderr, "INVALID STATUS CODE RECIVED FROM read_from_file\n");
