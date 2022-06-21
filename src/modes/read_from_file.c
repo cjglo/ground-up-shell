@@ -81,18 +81,18 @@ char*** file_to_strings(FILE* file) {
     char ch = fgetc(file);
     int test_i = 0;
     while(ch != EOF) {
-        printf("%d\n", test_i);
         if(ch == '\n') number_of_lines++;
         ch = fgetc(file);
     }
 
-    char*** str_lines = malloc(sizeof(char**)*(number_of_lines+1));
+    char*** str_lines = malloc(sizeof(char***)*(number_of_lines+1));
     str_lines[number_of_lines] = NULL; // to mark end
     // restart file pointer to now copy file to str
-    rewind(file);
+
 
     printf("\nHERE!\n");
 
+    rewind(file);
     ch = fgetc(file);
     int number_of_words = 0;
     int line = 0;
@@ -102,7 +102,7 @@ char*** file_to_strings(FILE* file) {
             number_of_words++;
         } else if(ch == '\n' || ch == EOF) {
             number_of_words++;
-            str_lines[line] = malloc(sizeof(char*)*(number_of_words+1));
+            str_lines[line] = malloc(sizeof(char**)*(number_of_words+1));
             str_lines[line][number_of_words] = NULL; // to mark end
             number_of_words = 0;
             line++;
@@ -122,11 +122,11 @@ char*** file_to_strings(FILE* file) {
         printf("%c\n", ch);
         if(ch == ' ') {
             printf("line: %d, word_i: %d, word_len: %d\n", line, word_index, word_len);
-            str_lines[line][word_index] = malloc(sizeof(char)*(word_len+1));
+            str_lines[line][word_index] = malloc(sizeof(char*)*(word_len+1));
             word_index++;
             word_len = 0;
         } else if(ch == '\n' || ch == EOF) {
-            str_lines[line][word_index] = malloc(sizeof(char)*(word_len+1));
+            str_lines[line][word_index] = malloc(sizeof(char*)*(word_len+1));
             line++;
             word_index = 0;
             word_len  = 0;
@@ -164,42 +164,4 @@ char*** file_to_strings(FILE* file) {
     str_lines[line][word_index][char_index] = '\0';
 
     return str_lines;
-
-
-    // int line_len = 1;
-    // int line_num = 0;
-    // do {
-    //     ch = fgetc(file);
-    //     if(ch != '\n' && ch != EOF) {
-    //         line_len++;
-    //     } else {
-    //         // same as incr ptr then deref
-    //         str_lines[line_num] = malloc(sizeof(char)*(line_len+1)); // extra 1 to insert null terminator
-    //         line_len = 0;
-    //         line_num++;
-    //     }
-    // } while(ch != EOF); 
-
-    // str_lines[line_num]= malloc(sizeof(char)*(1)); 
-    // str_lines[line_num][0] = '\0'; // TODO: Need this to determine end of char**?  Might be bad practice cause looks like a string
-
-    // rewind(file);
-
-    // // time to insert chars
-    // line_num = 0;
-    // int pos_in_line = 0;
-    // ch = fgetc(file);
-    // while(ch != EOF) {
-    //     if(ch != '\n') {
-    //         str_lines[line_num][pos_in_line] = ch;
-    //         pos_in_line++;
-    //     } else {
-    //         str_lines[line_num][pos_in_line] = '\0';
-    //         pos_in_line = 0;
-    //         line_num++;
-    //     }
-    //     ch = fgetc(file);
-    // }
-
-    // return str_lines;
 }
