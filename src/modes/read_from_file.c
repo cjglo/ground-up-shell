@@ -8,15 +8,9 @@ int read_from_file(FILE* file) {
 
     char*** buffer = file_to_strings(file); // ptr to lines, which are ptr to words of each line, words being C-strings
 
-    printf("\nCOMPLETED FUNCTION\n\n");
-
+    // loop through whole file and pass each line to func to fork & process
     for(int i = 0; buffer[i] != NULL; i++) {
-
-        for(int j = 0; buffer[i][j] != NULL; j++) {
-
-            printf("%s\n", buffer[i][j]);
-        }
-
+        fork_and_exec(buffer[i][0], buffer[i]);   
     }
     
     return FILE_EXEC_SUCCESS;
