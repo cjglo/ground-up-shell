@@ -5,11 +5,18 @@ A Unix Shell built in C without external libraries.
 
 ### Reading from file
 
-Currently the only way to run commands in the shell is to create a file listing commands to run and then passing that to the shell program. 
+Currently this project has just passed its 0.1 version.  It can currently forks a process and executes any binary in your PATH variable but only from an input file.  Run the following Makefile commands to run the shell:
+
+
+Insert the file where $(arg) is 
+```
+make build
+make run $(arg)
+```
 
 ## Current & Planned Features:
 
-- [ ] ⏳ [IN PROGRESS] ⏳ Accepts file input with commands of arbitary length and creates processes to execute, then exits parent process
+- [X] Accepts file input with commands of arbitary length and creates processes to execute, then exits parent process
 - [ ] Running commands from interactive user input
 - [ ] Setting/retrieving environment variables
 - [ ] Support for pipes (including stdin/stdout redirection)
