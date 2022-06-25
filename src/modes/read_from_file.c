@@ -9,11 +9,20 @@ int read_from_file(FILE* file) {
     char*** buffer = file_to_strings(file); // ptr to lines, which are ptr to words of each line, words being C-strings
 
     // loop through whole file and pass each line to func to fork & process
-    for(int i = 0; buffer[i] != NULL; i++) {
-        fork_and_exec(buffer[i][0], buffer[i]);   
+    int num_of_success = 0;
+    int i = 0;
+    for( ; buffer[i] != NULL; i++) {
+        num_of_success += fork_and_exec(buffer[i][0], buffer[i]);   
     }
-    
-    return FILE_EXEC_SUCCESS;
+
+    // TODO: Might want to rework how determining this if find cleaner solution
+    if(i == num_of_success) {
+    	return FILE_EXEC_SUCCESS;
+    } else if(num_of_success == 0) {
+	return FILE_EXEC_FAIL;
+    } else {
+	return FILE_EXEC_PARTIAL_SUCCESS;
+    }
 }
 
 char*** file_to_strings(FILE* file) {
